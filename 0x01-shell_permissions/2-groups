@@ -1,2 +1,1 @@
-#!/bin/bash
- -nG
+#1/bin/bash\n id -nG
