@@ -1,1 +1,2 @@
-#1/bin/bash\n id -nG
+#!/bin/bash
+group
