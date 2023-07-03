@@ -1,29 +1,28 @@
 #!/usr/bin/env bash
-# Configure Nginx so that its HTTP response contains
-# a custom header
-#
-balancer="\
-frontend haproxy_balancer
-    bind *:80
-    mode http
-    default_backend webservers
-    
-backend webservers
-    balance roundrobin
-    server 221173-web-01 52.3.245.98:80 check
-    server 221173-web-02 54.234.67.202:80 check
-"
-# Update packages
-apt-get -y update
-apt-get -y upgrade
+# a script that installs and configures HAProxy
 
-# Add HAProxy PPA
-apt-get -y install software-properties-common
-add-apt-repository -y ppa:vbernat/haproxy-2.5
-apt-get -y update
+# install HAProxy
+apt-get install --no-install-recommends software-properties-common -y
+add-apt-repository ppa:vbernat/haproxy-2.0 -y
+apt-get update -y
+apt-get install -y haproxy=2.0.\*
 
-# Install HAProxy
-apt-get -y install haproxy
-cp -a /etc/haproxy/haproxy.cfg{,.orig}
-echo "$balancer" >> /etc/haproxy/haproxy.cfg
+# configurations
+
+# make HAProxy load balancer to start automatically when the system boots.
+touch /etc/default/haproxy
+echo "ENABLED=1" >> /etc/default/haproxy
+# configuration in haproxy config file
+echo -e "
+
+frontend frontendserver
+   bind *:80
+   mode http
+   default_backend mywebservers
+
+backend mywebservers
+   balance roundrobin
+   server 221173-web-01 52.3.245.98:80 check
+   server 221173-web-02 54.234.67.202:80 check" >> /etc/haproxy/haproxy.cfg
+service haproxy start 
 service haproxy restart
