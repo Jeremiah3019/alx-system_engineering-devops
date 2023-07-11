@@ -46,4 +46,4 @@ The diagram should show:
 - that the application server generates the web page
 - that the application server request data from the database
 
-I hosted the diagram image [here](https://imgbox/...)
+I hosted the diagram image [here](https://imgur.com/...)
