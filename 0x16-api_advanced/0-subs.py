@@ -8,7 +8,7 @@ import requests
 def number_of_subscribers(subreddit):
     """Function that queries Reddit API"""
     uri = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    header = {"User-Agent": "My-User-Agent"}
+    header = {"User-Agent": "jeremiah3019"}
 
     sub_info = requests.get(uri, headers=header, allow_redirects=False)
     if sub_info.status_code >= 300:
