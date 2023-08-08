@@ -7,7 +7,7 @@ import requests
 def recurse(subreddit, hot_list=[], count=0, after=None):
     """Function that queries Reddit API"""
     uri = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
-    header = {"User-Agent": "My-User-Agent"}
+    header = {"User-Agent": "jeremiah3019"}
     param = {"count": count, "after": after}
 
     sub_info = requests.get(uri, params=param, headers=header,
