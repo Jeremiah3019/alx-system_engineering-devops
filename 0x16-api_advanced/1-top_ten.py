@@ -8,7 +8,7 @@ import requests
 def top_ten(subreddit):
     """Function that queries Reddit API"""
     uri = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
-    header = {"User-Agent": "My-User-Agent"}
+    header = {"User-Agent": "jeremiah3019"}
 
     sub_info = requests.get(uri, headers=header, allow_redirects=False)
     if sub_info.status_code >= 300:
